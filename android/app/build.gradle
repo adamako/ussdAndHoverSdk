@@ -57,12 +57,9 @@ android {
 flutter {
     source '../..'
 }
-repositories {
-    mavenCentral()
-    maven { url 'http://maven.usehover.com/releases' }
-}
+
 
 dependencies {
-    implementation('com.hover:android-sdk:1.4.3') { transitive = true}
+    implementation('com.hover:android-sdk:1.6.5') { transitive = true}
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

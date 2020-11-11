@@ -14,21 +14,7 @@ import java.lang.Exception
 class MainActivity: FlutterActivity() {
     private val CHANNEL: String= "kikoba.co.tz/hover"
 
-    private fun SendMoney(phoneNumber:String,amount:String){
-        Hover.initialize(this)
-        try {
-            Log.d("MainActivity","Sims are= "+ Hover.getPresentSims(this))
-            Log.d("MainActivity","Hover actions are=  "+ Hover.getAllValidActions(this))
-        }catch (e:Exception){
-            Log.d("MainActivity", "hiver exception",e)
 
-        }
-        val i:Intent = HoverParameters.Builder(this)
-                .request("c98397c9")
-                .buildIntent()
-
-        startActivityForResult(i,0)
-    }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -37,8 +23,9 @@ class MainActivity: FlutterActivity() {
             val phoneNumber: String= arguments["phoneNumber"] as String
             val amount: String= arguments["amount"] as String
 
-            if(call.method.equals("sendMoney")){
+            if(call.method == "sendMoney"){
                 SendMoney(phoneNumber,amount)
+
                 val response: String= "sent"
 
                 result.success(response)
@@ -46,11 +33,20 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+
+    private fun SendMoney(phoneNumber:String,amount:String){
         Hover.initialize(this)
+
+        try {
+            Log.d("MainActivity","Sims are= "+ Hover.getPresentSims(this))
+            Log.d("MainActivity","Hover actions are=  "+ Hover.getAllValidActions(this))
+        }catch (e:Exception){
+            Log.d("MainActivity", "hiver exception",e)
+
+        }
+        val i:Intent =HoverParameters.Builder(this)
+                .request("288a7dbd")
+                .buildIntent()
+        startActivityForResult(i,0)
     }
-
-
-
 }

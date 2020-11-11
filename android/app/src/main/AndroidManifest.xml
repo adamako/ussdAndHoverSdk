@@ -4,13 +4,14 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="ussd_sample"
         android:icon="@mipmap/ic_launcher">
 
         <meta-data
-            android:name="com.example.ussd_sample"
+            android:name="com.hover.ApiKey"
             android:value="001934fdcf35320dc8c22b41ba3d47f8"/>
 
         <activity
