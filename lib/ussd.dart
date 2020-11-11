@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sim_data/sim_data.dart';
-import 'package:ussd_sample/sendMoney.dart';
 import 'package:ussd_sample/ussd2.dart';
 import 'package:ussd_service/ussd_service.dart';
+
+import 'check_money.dart';
 
 enum RequestState {
   Ongoing,
@@ -144,7 +145,7 @@ class _USSDState extends State<USSD> {
             RaisedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SendMoney()));
+                    MaterialPageRoute(builder: (context) => CheckMoney()));
               },
               child: Text('Hover'),
             )
