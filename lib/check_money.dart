@@ -8,7 +8,6 @@ class CheckMoney extends StatefulWidget {
 
 class _CheckMoneyState extends State<CheckMoney> {
   static const _hover = const MethodChannel("kikoba.co.tz/hover");
-  final _formKey = GlobalKey<FormState>();
 
   TextEditingController codeController = TextEditingController();
 
@@ -28,68 +27,21 @@ class _CheckMoneyState extends State<CheckMoney> {
     });
   }
 
-  Future<dynamic> getMessage() async {
-    String reponse = " ";
-    try {
-      final String message = await _hover.invokeMethod('getMessage');
-      reponse = message;
-    } on PlatformException catch (e) {
-      reponse = e.message;
-    }
-    setState(() {
-      message = reponse;
-    });
-  }
-
-  Widget _buildNumberTextField() {
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-        child: TextFormField(
-          inputFormatters: [
-            LengthLimitingTextInputFormatter(10),
-          ],
-          controller: codeController,
-          validator: (value) {
-            if (value.isEmpty) {
-              return 'Please enter phone number';
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Phone Number',
-            suffixIcon: Icon(Icons.dialpad),
-          ),
-          keyboardType: TextInputType.numberWithOptions(),
-        ));
-  }
-
-  Widget _buildTuma() {
-    return Form(
-        key: _formKey,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
         child: Column(
-          children: <Widget>[
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             RaisedButton(
               onPressed: () {
                 checkMoney();
               },
-              child: Text("Consulter solde"),
+              child: Text("Check balance"),
             ),
-            Text(_response),
+            Text("$_response")
           ],
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Hover'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [_buildTuma()],
         ),
       ),
     );

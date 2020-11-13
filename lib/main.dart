@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ussd_sample/ussd.dart';
+import 'package:ussd_sample/check_money.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
           appBar: AppBar(
             title: const Text('Ussd '),
           ),
-          body: USSD()),
+          body: CheckMoney()),
     );
   }
 }

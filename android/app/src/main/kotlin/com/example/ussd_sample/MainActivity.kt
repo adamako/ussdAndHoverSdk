@@ -21,50 +21,16 @@ class MainActivity: FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
-////          val arguments: Map<String, Any> = call.arguments()
-//            val phoneNumber: String= arguments["phoneNumber"] as String
-//            val amount: String= arguments["amount"] as String
-//
-//            val code: String= call.arguments.toString()
-//            print(code)
-//            if(call.method == "checkMoney"){
-//                checkMoney()
-//                val response: String= "Envoyé"
-//                result.success(response)
-//            }
 
             when(call.method){
                 "checkMoney" -> {
-                    val response: String =getMessage()
+                    val response: String ="Sent"
                     checkMoney()
                     result.success(response)
                 }
             }
         }
     }
-
-    fun getMessage(): String {
-        return message
-    }
-
-
-
-    private fun SendMoney(phoneNumber: String, amount: String){
-        Hover.initialize(this)
-
-        try {
-            Log.d("MainActivity", "Sims are= " + Hover.getPresentSims(this))
-            Log.d("MainActivity", "Hover actions are=  " + Hover.getAllValidActions(this))
-        }catch (e: Exception){
-            Log.d("MainActivity", "hiver exception", e)
-
-        }
-        val i:Intent =HoverParameters.Builder(this)
-                .request("288a7dbd")
-                .buildIntent()
-        startActivityForResult(i, 0)
-    }
-
 
     private fun checkMoney(){
         Hover.initialize(this)
@@ -85,10 +51,8 @@ class MainActivity: FlutterActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
             val sessionTextArr = data?.getStringArrayExtra("session_messages")
-            val uuid = data?.getStringExtra("uuid")
             if (sessionTextArr != null) {
                 for (me in sessionTextArr.indices){
                     message+=me
